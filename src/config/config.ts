@@ -10,8 +10,10 @@ export default registerAs('config', () => ({
     password: process.env.DB_PASSWORD,
   },
   contracts: {
-    publicAddess: process.env.PUBLIC_ADDRESS,
+    publicAddress: process.env.PUBLIC_ADDRESS,
     privateKey: process.env.PRIVATE_KEY,
     providerURL: process.env.PROVIDER_URL,
+    providerProjectId: process.env.PROVIDER_PROJECT_ID,
+    providerApiKey: process.env.PROVIDER_API_KEY,
   },
 }));

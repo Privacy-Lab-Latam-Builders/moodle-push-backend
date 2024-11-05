@@ -13,4 +13,7 @@ export class Course {
 
   @Column()
   pushGroupID: string;
+
+  @Column()
+  contractAddress: string;
 }

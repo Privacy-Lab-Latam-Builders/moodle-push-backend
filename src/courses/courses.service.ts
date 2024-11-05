@@ -7,6 +7,7 @@ import { Course } from './entities/course.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCourseDTO } from './dto/create-course.dto';
 import { PushService } from 'src/push/push.service';
+import { ContractsService } from 'src/contracts/contracts.service';
 
 @Injectable()
 export class CoursesService {
@@ -15,6 +16,7 @@ export class CoursesService {
     private coursesRepository: Repository<Course>,
     private eventEmitter: EventEmitter2,
     private readonly pushService: PushService,
+    private readonly contractsService: ContractsService,
   ) {}
 
   async emitEvent(courseNotificationDTO: CourseNotificationDTO) {
@@ -29,6 +31,11 @@ export class CoursesService {
     } = courseDTO;
 
     const pushGroupID = await this.pushService.createGroup(name);
+    const contractAddress =
+      await this.contractsService.deployCourseCertificationContract(
+        name,
+        'ZKA',
+      );
 
     console.log('Push Group ID:', pushGroupID);
 
@@ -36,6 +43,7 @@ export class CoursesService {
       name,
       moodleID,
       pushGroupID,
+      contractAddress,
     });
 
     return await this.coursesRepository.save(newCourse);

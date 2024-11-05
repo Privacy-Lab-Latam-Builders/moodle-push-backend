@@ -21,4 +21,9 @@ export class CoursesController {
   findOne(@Param('id') id: string) {
     return this.coursesService.findOne(+id);
   }
+
+  @Get('moodle/:moodleID')
+  findByMoodleID(@Param('moodleID') moodleID: string) {
+    return this.coursesService.findByMoodleID(moodleID);
+  }
 }

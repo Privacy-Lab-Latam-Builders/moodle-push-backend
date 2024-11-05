@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ContractService } from './contracts.service';
+import { ContractsService } from './contracts.service';
 
 @Controller('contracts')
 export class ContractsController {
-  constructor(private readonly contractsService: ContractService) {}
+  constructor(private readonly contractsService: ContractsService) {}
 
   @Post('deploy')
   async createContract(
